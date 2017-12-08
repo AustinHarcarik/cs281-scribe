@@ -6,7 +6,7 @@
 
 
 \begin{document}
-\lecture{6}{September 20}{Sasha Rush}{Meena Jagadeesan, Yufeng Ling, Tomoka Kan, Wenting Cai}{Exponential Families}
+\lecture{6}{September 20}{Sasha Rush}{Meena Jagadeesan, Yufeng Ling, Tomoka Kan, Wenting Cai, Austin Harcarik}{Exponential Families}
 
 \subsection{Introduction}
 (Wainwright and Jordan (textbook) presents a more detailed coverage of the material in this lecture.)
@@ -200,5 +200,46 @@ $$p(y \mid x) = \sigma(w^Tx + b)^y(1 - \sigma(w^Tx + b))^{1-y}$$
 
 $\mu_c = \text{softmax}(w_c^T x + b_c)_c$
 
-$\theta_c = \log \mu_c$
+$\theta_c = \log \mu_c$ 
+
+\subsection{Exercise} 
+Let $X \sim IG(\mu, \lambda)$. That is, let $X$ follow an Inverse-Gaussian distribution with the following density: \newline
+\newline
+$f_X(x) = \sqrt{\frac{\lambda}{2 \pi x^3}} exp(\frac{- \lambda(x - \mu)^2}{2 \mu^2 x})$ \newline
+$x, \mu, \lambda > 0$ \newline
+\newline
+Given that Inverse-Gaussians are members of the exponential family, find the sufficient statistic vector $\phi$ in minimal form. \newline
+\newline
+Solution: \newline
+\newline
+Start by taking the ratio of the likelihoods of two sets of observations: \newline
+\newline
+\Large
+$\frac{L(X_n)}{L(Y_n)} = \frac{\prod_{i=1}^{n}[\frac{\lambda}{2 \pi}]^{1/2} x_i^{-3/2} exp(\frac{- \lambda(x_i - \mu)^2}{2 \mu^2 x_i})}{\prod_{i=1}^{n}[\frac{\lambda}{2 \pi}]^{1/2} y_i^{-3/2} exp(\frac{- \lambda(y_i - \mu)^2}{2 \mu^2 y_i})}$ \newline
+\newline
+\normalsize 
+Simplify: \newline
+\newline
+\Large
+$\frac{L(X_n)}{L(Y_n)} = \frac{\prod_{i=1}^{n} x_i^{-3/2}}{\prod_{i=1}^{n} y_i^{-3/2}}\frac{exp(\frac{- \lambda}{2 \mu^2} \sum_{i=1}^{n} (\frac{x_i^2 - 2 \mu x_i + \mu^2}{x_i}))}{exp(\frac{- \lambda}{2 \mu^2} \sum_{i=1}^{n} (\frac{x_i^2 - 2 \mu x_i + \mu^2}{x_i}))}$ \newline 
+\newline
+\newline
+\normalsize
+$\frac{L(X_n)}{L(Y_n)} = \prod_{i=1}^{n} (\frac{y_i}{x_i})^{3/2} exp(\frac{\lambda}{2 \mu^2} \sum_{i=1}^{n} (y_i - 2\mu \frac{\mu^2}{y_i} - x_i + 2\mu - \frac{\mu^2}{x_i}))$ \newline 
+\newline
+$\frac{L(X_n)}{L(Y_n)} = \prod_{i=1}^{n} (\frac{y_i}{x_i})^{3/2} exp(\frac{\lambda}{2 \mu^2} \sum_{i=1}^{n}(y_i - x_i) + \frac{\lambda}{2} \sum_{i=1}^{n}(\frac{1}{y_i} - \frac{1}{x_i}))$ \newline
+\newline
+To find the minimal sufficient statistic for $\mu$, we must find when this equation is constant with respect to $\mu$: \newline
+\newline
+$\phi(\mu) \rightarrow \sum_{i=1}^{n} x_i = \sum_{i=1}^{n} y_i \rightarrow \phi(\mu) = \sum_{i=1}^{n} x_i$ \newline
+\newline
+To find the minimal sufficient statistic for $\lambda$, we must find when everything inside the sums is 0: \newline
+\newline
+$\phi(\lambda) \rightarrow \sum_{i=1}^{n} x_i = \sum_{i=1}^{n} y_i$ and $\sum_{i=1}^{n} 1/x_i = \sum_{i=1}^{n} 1/y_i \rightarrow \phi(\lambda) = (\sum_{i=1}^{n} x_i, \sum_{i=1}^{n} x_i^{-1})$
 \end{document}
+
+
+
+
+
+
